@@ -1,21 +1,37 @@
 #coding=utf-8
 
-class A(object):
+class Base(object):
     def __init__(self):
+        super(Base, self).__init__()
+        print("Base")
+        self.n = 0
+    
+    def setN(self, n):
+        self.n = 0
+        print("class Base", self.n)
+
+class A(Base):
+    def __init__(self):
+        super(A, self).__init__()
         self.n = 1
         print("class A") 
     
     def setN(self, n):
+        super().setN(n)
         self.n = n
+        print("class A", self.n)
 
 
-class B(object):
+class B(Base):
     def __init__(self):
+        super(B, self).__init__()
         self.n = 2
         print("class B")
     
     def setN(self, n):
+        super().setN(n)
         self.n = -n 
+        print("class B", self.n)
 
 
 class C(A, B):
@@ -26,7 +42,9 @@ class C(A, B):
         print("class C")
     
     def setN(self, n):
+        super().setN(n)
         self.n = 2*n 
+        print("Class C", self.n)
         print(self.n)
         A.setN(self, n)
         print(self.n)
@@ -52,6 +70,7 @@ class D(object):
 
 if __name__ == "__main__":
     c1 = C(4)
+    print(C.__mro__)
     c1.setN(5)
 
     d1 = D(2) 
@@ -66,5 +85,4 @@ if __name__ == "__main__":
     print(d1._D__n1)
     n3 = d2.getN1()
     print(n3)  
-
 
